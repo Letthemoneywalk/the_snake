@@ -1,6 +1,6 @@
 from random import choice, randint
-import pygame
 
+import pygame
 
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -60,17 +60,20 @@ def handle_keys(game_object):
 # Тут опишите все классы игры.
 class GameObject:
     """Базовый класс для всех игровых объектов."""
+
     def __init__(self):
         """Инициализирует игровой объект."""
         self.position = ((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))
         self.body_color = None
 
     def draw(self):
+        """Отрисовывает игровой объект на экране."""
         pass
 
 
 class Apple(GameObject):
     """Класс, представляющий яблоко в игре."""
+
     def __init__(self):
         """Инициализирует яблоко со случайной позицией."""
         super().__init__()
@@ -84,6 +87,7 @@ class Apple(GameObject):
         self.position = (x, y)
 
     def draw(self):
+        """Отрисовывает яблоко на экране."""
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -91,6 +95,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс, представляющий змейку в игре."""
+
     def __init__(self):
         """Инициализирует змейку с начальными параметрами."""
         super().__init__()
@@ -115,11 +120,10 @@ class Snake(GameObject):
     def move(self):
         """
         Перемещает змейку в текущем направлении.
-        
+
         Returns:
             bool: True если змейка столкнулась с собой, иначе False.
         """
-
         head_x, head_y = self.get_head_position()
         dx, dy = 0, 0
 
@@ -157,6 +161,7 @@ class Snake(GameObject):
 
     # # Метод draw класса Snake
     def draw(self):
+        """Отрисовывает змейку на экране."""
         for position in self.positions:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
